@@ -1,0 +1,46 @@
+extends ../layout/layout.pug
+
+block content 
+    .row 
+        .col-md-3 
+            //- include ../includes/list.pug 
+
+
+        .col-md-9 
+            .row  
+            
+                if(action=="delete")
+                    div.alert.alert-danger The Product has been deleted
+                
+                if(action=="edit")
+                    div.alert.alert-success The Product has been updated
+
+                if products.length > 0 
+                    table.table.table-bordered
+                        thead 
+                            tr 
+                                th(style="width:100px;") Image
+                                th Product Name
+                                th(style="width:150px;") Price
+                                th(style="width:133px;") Brand
+                                th(style="width:130px;") 
+                                
+                        tbody  
+                            each product in products
+                                tr 
+                                    td 
+                                        img(src=`/img/${product.image}` 
+                                        width="80")
+                                    td #{product.name} 
+                                    td #{product.price} TL  
+                                    td #{product.brand}  
+                                    td #{product.userId.name}  
+                                    td 
+                                        a.btn.btn-primary.btn-sm(href=`/admin/products/${product._id}`) edit 
+
+                                        form(action="/delete-product" method="POST")
+                                            input(type="hidden",value=`${csrfToken}` name="_csrf")
+                                            input(type="hidden" name="id" value=`${product._id}`)
+                                            button(type="submit").btn.btn-danger.btn-sm Delete                              
+                else 
+                        h1 No Products

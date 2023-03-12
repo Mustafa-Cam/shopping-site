@@ -1,0 +1,36 @@
+extends ../layout/layout.pug
+
+block styles 
+        link(rel="stylesheet" href="/css/forms.css")
+block content
+            if errorMessage
+                div.alert.alert-danger.col-sm-7 !{errorMessage}
+            form(action="/addproduct" method="post" enctype="multipart/form-data")
+                input(type="hidden",value=`${csrfToken}` name="_csrf")
+                .form-group.row
+                    label.col-sm-2.col-form-label Product name
+                    .col-sm-10
+                        input(type="text" name="name").form-control#name
+                .form-group.row
+                    label.col-sm-2.col-form-label price
+                    .col-sm-10
+                        input(type="text" name="price").form-control#price
+                .form-group.row
+                    label.col-sm-2.col-form-label image
+                    .col-sm-10
+                        input(type="file" name="image").form-control-file#image
+                //- .form-group.row
+                //-     label.col-sm-2.col-form-label category
+                //-     .col-sm-10
+                //-         select(type="text" name="categoryid").form-control#categoryid        
+                //-             option(value="-1")
+                //-             each category in categories 
+                //-                 option(value=`${category.id}` ) #{category.name}
+                .form-group.row
+                    label.col-sm-2.col-form-label brand
+                    .col-sm-10
+                        input(type="text" name="brand").form-control#brand
+                                    
+                .form-group.row
+                    .col-sm-10.offset-sm-2                       
+                        input.btn.btn-primary(type="submit" value="save product")

@@ -1,0 +1,22 @@
+mixin createProduct(product)
+     .col-md-4
+
+                .card.my-3
+                    img(src=`/img/${product.image}` alt="").card-img-top
+                    .card-body
+                        h4.card-title
+                            a(href=`/products/${product._id}`) #{product.name}
+                        p #{product.brand}
+                        //- p.card-text.pt-2 lorem ipsum dolor sit.
+                        
+                        small.text-muted
+                            i.fas.fa-lira-sign #{product.price}
+                        
+                    .card-footer.text-center 
+                        
+                        a(href=`/products/${product._id}`).btn.btn-outline-secondary.btn-sm Details
+
+                        form(action="/cart" method="POST")
+                            input(type="hidden" name="productId" value=`${product._id}`) 
+                            button(type="submit").btn.btn-outline-secondary.btn-sm.ml-3 Add to Cart
+                    

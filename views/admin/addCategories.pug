@@ -1,0 +1,18 @@
+extends ../layout/layout.pug
+
+block styles 
+        link(rel="stylesheet" href="/css/forms.css")
+block content
+            form(action="/addcategories" method="post")
+                input(type="hidden",value=`${csrfToken}` name="_csrf")
+                .form-group.row 
+                    label.col-sm-2.col-form-label Category Name
+                    .col-sm-10 
+                        input(type="text" name="name").form-control#name
+                .form-group.row 
+                    label.col-sm-2.col-form-label Description
+                    .col-sm-10 
+                        input(type="text" name="description").form-control#name
+                .form-group-row 
+                    .col-sm-10.offset-sm-2 
+                        input.btn.btn-primary(type="submit" value="Add category")
